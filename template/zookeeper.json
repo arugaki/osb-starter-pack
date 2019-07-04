@@ -1,6 +1,6 @@
 {
   "name": "zookeeper",
-  "description": "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.",
+  "description": "ZooKeeper cluster with three peers.",
   "tags": [
     "synchronization",
     "naming"
@@ -16,32 +16,70 @@
   "cpu_quota": ["0.5"],
   "memory_quota": ["1024"],
   "disk_quota": ["1"],
-  "gpu_quota": ["0"],
   "properties": {
+    "NAMESPACE": {
+      "default": "",
+      "description": "",
+      "required": true,
+      "editable": false,
+      "visitable": false,
+      "type": "string"
+    },
+    "INSTANCE_NAME": {
+      "default": "",
+      "description": "",
+      "required": true,
+      "editable": false,
+      "visitable": false,
+      "type": "string"
+    },
+    "STORAGECLASS": {
+      "default": "",
+      "description": "",
+      "required": false,
+      "editable": true,
+      "visitable": true,
+      "type": "string"
+    },
     "ZOO_TICK_TIME": {
       "default": "4000",
+      "description": "",
       "required": true,
-      "description": ""
+      "editable": false,
+      "visitable": false,
+      "type": "string"
     },
     "ZOO_INIT_LIMIT": {
       "default": "10",
+      "description": "",
       "required": true,
-      "description": ""
+      "editable": false,
+      "visitable": false,
+      "type": "string"
     },
     "ZOO_SYNC_LIMIT": {
       "default": "5",
+      "description": "",
       "required": true,
-      "description": ""
+      "editable": false,
+      "visitable": false,
+      "type": "string"
     },
     "ZOO_JVM_XMS": {
       "default": "512",
+      "description": "",
       "required": true,
-      "description": ""
+      "editable": false,
+      "visitable": false,
+      "type": "string"
     },
     "ZOO_JVM_XMX": {
       "default": "512",
+      "description": "",
       "required": true,
-      "description": ""
+      "editable": false,
+      "visitable": false,
+      "type": "string"
     }
   }
 }

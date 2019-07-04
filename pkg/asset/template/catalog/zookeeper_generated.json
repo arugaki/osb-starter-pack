@@ -1,7 +1,7 @@
 {
-  "id": "d5e7675f4ab5ccb5af3e2a7595a78ddd",
+  "id": "e9f5280d5337aa089a0ddb38a123a54a",
   "name": "zookeeper",
-  "description": "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.",
+  "description": "ZooKeeper cluster with three peers.",
   "tags": [
     "synchronization",
     "naming"
@@ -11,8 +11,8 @@
   "plan_updateable": true,
   "plans": [
     {
-      "id": "6501bfb47fc4fdbcb8daf2777fc644c2",
-      "name": "p-0.5-1024-1-0",
+      "id": "c6da7c13e6e7b0e5eb9ab723b717a8fb",
+      "name": "p-0.5-1024-1",
       "description": "",
       "free": true,
       "bindable": true,
@@ -20,8 +20,7 @@
         "bullets": [
           "0.5",
           "1024",
-          "1",
-          "0"
+          "1"
         ],
         "need_quota": true
       },
@@ -29,59 +28,137 @@
         "service_instance": {
           "create": {
             "parameters": {
+              "INSTANCE_NAME": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "NAMESPACE": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "STORAGECLASS": {
+                "description": "",
+                "default": "",
+                "required": false,
+                "type": "string",
+                "editable": true,
+                "visitable": true
+              },
               "ZOO_INIT_LIMIT": {
                 "description": "",
                 "default": "10",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMS": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMX": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_SYNC_LIMIT": {
                 "description": "",
                 "default": "5",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_TICK_TIME": {
                 "description": "",
                 "default": "4000",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               }
             }
           },
           "update": {
             "parameters": {
+              "INSTANCE_NAME": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "NAMESPACE": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "STORAGECLASS": {
+                "description": "",
+                "default": "",
+                "required": false,
+                "type": "string",
+                "editable": true,
+                "visitable": true
+              },
               "ZOO_INIT_LIMIT": {
                 "description": "",
                 "default": "10",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMS": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMX": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_SYNC_LIMIT": {
                 "description": "",
                 "default": "5",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_TICK_TIME": {
                 "description": "",
                 "default": "4000",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               }
             }
           }
@@ -89,30 +166,69 @@
         "service_binding": {
           "create": {
             "parameters": {
+              "INSTANCE_NAME": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "NAMESPACE": {
+                "description": "",
+                "default": "",
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
+              },
+              "STORAGECLASS": {
+                "description": "",
+                "default": "",
+                "required": false,
+                "type": "string",
+                "editable": true,
+                "visitable": true
+              },
               "ZOO_INIT_LIMIT": {
                 "description": "",
                 "default": "10",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMS": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_JVM_XMX": {
                 "description": "",
                 "default": "512",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_SYNC_LIMIT": {
                 "description": "",
                 "default": "5",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               },
               "ZOO_TICK_TIME": {
                 "description": "",
                 "default": "4000",
-                "required": true
+                "required": true,
+                "type": "string",
+                "editable": false,
+                "visitable": false
               }
             }
           }

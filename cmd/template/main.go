@@ -20,7 +20,6 @@ type TemplateConfig struct {
 	CpuQuota            []string               `json:"cpu_quota"`
 	MemoryQuota         []string               `json:"memory_quota"`
 	DiskQuota           []string               `json:"disk_quota"`
-	GpuQuota            []string               `json:"gpu_quota"`
 	Properties          map[string]Property    `json:"properties"`
 }
 
@@ -28,6 +27,9 @@ type Property struct {
 	Description string `json:"description"`
 	Default     string `json:"default"`
 	Required    bool   `json:"required"`
+	Type        string `json:"type"`
+	Editable    bool   `json:"editable"`
+	Visitable   bool   `json:"visitable"`
 }
 
 var options struct {
@@ -49,9 +51,7 @@ func truePtr() *bool {
 func main() {
 
 	if options.InputPath == "" || options.OutputPath == "" {
-		options.InputPath = "/Users/arugaki/hub/osb-starter-pack/src/github.com/pmorie/osb-starter-pack/template"
-		options.OutputPath = "/Users/arugaki/hub/osb-starter-pack/src/github.com/pmorie/osb-starter-pack/pkg/asset/template/catalog"
-		//flag.Usage()
+		flag.Usage()
 	}
 
 	templateConfigs, err := loadTemplate(options.InputPath)
@@ -111,22 +111,20 @@ func generateTemplate(templateConfigs map[string]TemplateConfig) map[string]v2.S
 			for _, cpu := range templateConfig.CpuQuota {
 				for _, memory := range templateConfig.MemoryQuota {
 					for _, disk := range templateConfig.DiskQuota {
-						for _, gpu := range templateConfig.GpuQuota {
-							plan := v2.Plan{}
-							plan.Description = ""
-							plan.Name = fmt.Sprintf("p-%s-%s-%s-%s", cpu, memory, disk, gpu)
-							plan.Bindable = truePtr()
-							plan.Free = truePtr()
-							plan.ID = uuid()
-							plan.Metadata = map[string]interface{}{
-								"need_quota": true,
-								"bullets":    []string{cpu, memory, disk, gpu},
-							}
-							schemas := generateSchemas(templateConfig.Properties)
-							plan.Schemas = schemas
-
-							plans = append(plans, plan)
+						plan := v2.Plan{}
+						plan.Description = ""
+						plan.Name = fmt.Sprintf("p-%s-%s-%s", cpu, memory, disk)
+						plan.Bindable = truePtr()
+						plan.Free = truePtr()
+						plan.ID = uuid()
+						plan.Metadata = map[string]interface{}{
+							"need_quota": true,
+							"bullets":    []string{cpu, memory, disk},
 						}
+						schemas := generateSchemas(templateConfig.Properties)
+						plan.Schemas = schemas
+
+						plans = append(plans, plan)
 					}
 				}
 			}

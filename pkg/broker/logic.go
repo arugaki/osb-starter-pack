@@ -398,7 +398,9 @@ func (b *BusinessLogic) Update(request *osb.UpdateInstanceRequest, c *broker.Req
 		}
 	}
 
-	templateAfterInit, err := templateInit(srcTemplate, namespace, instanceName, instance.InstanceID)
+	storageClass := getStorageClass(request.Parameters)
+
+	templateAfterInit, err := templateInit(srcTemplate, namespace, instanceName, storageClass, instance.InstanceID)
 	if err != nil {
 		glog.Errorf("apply namespace to templates failed, err is %+v", err)
 		return nil, osb.HTTPStatusCodeError{

@@ -1,18 +1,17 @@
 package broker
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/arugaki/osb-starter-pack/pkg/asset"
 	"github.com/arugaki/osb-starter-pack/pkg/dao"
 	"github.com/arugaki/osb-starter-pack/pkg/kubernetes"
 	"github.com/arugaki/osb-starter-pack/pkg/service"
+	"github.com/arugaki/osb-starter-pack/pkg/util"
 	"github.com/golang/glog"
 	"github.com/pmorie/go-open-service-broker-client/v2"
 	"github.com/pmorie/osb-broker-lib/pkg/broker"
 	"strings"
-	"text/template"
 )
 
 const (
@@ -176,39 +175,45 @@ func getInstanceName(params map[string]interface{}) (string, error) {
 	}
 }
 
+func getStorageClass(params map[string]interface{}) string {
+	if ns, ok := params["STORAGECLASS"]; ok {
+		return fmt.Sprintf("%v", ns)
+	} else {
+		return ""
+	}
+}
+
 // replace template instanceid and namespace
-func templateInit(template, namespace, instanceName, id string) (string, error) {
+func templateInit(template, namespace, instanceName, storageClass, id string) (string, error) {
 	type Params struct {
-		Id           string
+		InstanceId   string
 		Namespace    string
 		InstanceName string
+		StorageClass string
 	}
 
-	newTemplate, err := executeTemplate(template, Params{
-		Id:           id,
-		Namespace:    namespace,
-		InstanceName: instanceName,
-	})
+	var params Params
+	if storageClass == "" {
+		params = Params{
+			InstanceId:   id,
+			Namespace:    namespace,
+			InstanceName: instanceName,
+		}
+	} else {
+		params = Params{
+			InstanceId:   id,
+			Namespace:    namespace,
+			InstanceName: instanceName,
+			StorageClass: storageClass,
+		}
+	}
+
+	newTemplate, err := util.ExecuteTemplate(template, params)
 	if err != nil {
 		return "", err
 	}
 
 	return newTemplate, nil
-}
-
-func executeTemplate(t string, data interface{}) (string, error) {
-	tmpl, err := template.New("service").Parse(t)
-	if err != nil {
-		return "", err
-	}
-
-	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, data)
-	if err != nil {
-		return "", err
-	}
-
-	return buf.String(), err
 }
 
 func (b *BusinessLogic) applyParameters(serviceName, template string, params map[string]interface{}) (string, error) {
@@ -237,7 +242,7 @@ func (b *BusinessLogic) applyPlan(serviceName, template string, plan *v2.Plan) (
 
 func (b *BusinessLogic) applySpecial(serviceName, template string, kubeServices map[string]string) (string, error) {
 	if s, ok := b.services[serviceName]; ok {
-		t, err := s.ApplySpecial(template, kubeServices)
+		t, err := s.ApplySpecial(template, kubeServices, b.kcl.Client)
 		if err != nil {
 			return "", err
 		}
@@ -249,7 +254,7 @@ func (b *BusinessLogic) applySpecial(serviceName, template string, kubeServices 
 
 func (b *BusinessLogic) getDashboardURL(serviceName string, params map[string]interface{}, kubeServices map[string]string) (string, error) {
 	if s, ok := b.services[serviceName]; ok {
-		url, err := s.GetDashboardURL(params, kubeServices)
+		url, err := s.GetDashboardURL(params, kubeServices, b.kcl.Client)
 		if err != nil {
 			return "", err
 		}
