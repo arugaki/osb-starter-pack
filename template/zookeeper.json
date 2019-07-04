@@ -1,0 +1,47 @@
+{
+  "name": "zookeeper",
+  "description": "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.",
+  "tags": [
+    "synchronization",
+    "naming"
+  ],
+  "plan_updateable": true,
+  "bindable": true,
+  "instances_retrievable": true,
+  "bindings_retrievable": true,
+  "allow_context_updates": true,
+  "metadata": {
+    "displayName": "The RuYiCloud Service Broker"
+  },
+  "cpu_quota": ["0.5"],
+  "memory_quota": ["1024"],
+  "disk_quota": ["1"],
+  "gpu_quota": ["0"],
+  "properties": {
+    "ZOO_TICK_TIME": {
+      "default": "4000",
+      "required": true,
+      "description": ""
+    },
+    "ZOO_INIT_LIMIT": {
+      "default": "10",
+      "required": true,
+      "description": ""
+    },
+    "ZOO_SYNC_LIMIT": {
+      "default": "5",
+      "required": true,
+      "description": ""
+    },
+    "ZOO_JVM_XMS": {
+      "default": "512",
+      "required": true,
+      "description": ""
+    },
+    "ZOO_JVM_XMX": {
+      "default": "512",
+      "required": true,
+      "description": ""
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "id": "d5e7675f4ab5ccb5af3e2a7595a78ddd",
+  "name": "zookeeper",
+  "description": "ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.",
+  "tags": [
+    "synchronization",
+    "naming"
+  ],
+  "bindable": true,
+  "bindings_retrievable": true,
+  "plan_updateable": true,
+  "plans": [
+    {
+      "id": "6501bfb47fc4fdbcb8daf2777fc644c2",
+      "name": "p-0.5-1024-1-0",
+      "description": "",
+      "free": true,
+      "bindable": true,
+      "metadata": {
+        "bullets": [
+          "0.5",
+          "1024",
+          "1",
+          "0"
+        ],
+        "need_quota": true
+      },
+      "schemas": {
+        "service_instance": {
+          "create": {
+            "parameters": {
+              "ZOO_INIT_LIMIT": {
+                "description": "",
+                "default": "10",
+                "required": true
+              },
+              "ZOO_JVM_XMS": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_JVM_XMX": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_SYNC_LIMIT": {
+                "description": "",
+                "default": "5",
+                "required": true
+              },
+              "ZOO_TICK_TIME": {
+                "description": "",
+                "default": "4000",
+                "required": true
+              }
+            }
+          },
+          "update": {
+            "parameters": {
+              "ZOO_INIT_LIMIT": {
+                "description": "",
+                "default": "10",
+                "required": true
+              },
+              "ZOO_JVM_XMS": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_JVM_XMX": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_SYNC_LIMIT": {
+                "description": "",
+                "default": "5",
+                "required": true
+              },
+              "ZOO_TICK_TIME": {
+                "description": "",
+                "default": "4000",
+                "required": true
+              }
+            }
+          }
+        },
+        "service_binding": {
+          "create": {
+            "parameters": {
+              "ZOO_INIT_LIMIT": {
+                "description": "",
+                "default": "10",
+                "required": true
+              },
+              "ZOO_JVM_XMS": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_JVM_XMX": {
+                "description": "",
+                "default": "512",
+                "required": true
+              },
+              "ZOO_SYNC_LIMIT": {
+                "description": "",
+                "default": "5",
+                "required": true
+              },
+              "ZOO_TICK_TIME": {
+                "description": "",
+                "default": "4000",
+                "required": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "displayName": "The RuYiCloud Service Broker"
+  }
+}
